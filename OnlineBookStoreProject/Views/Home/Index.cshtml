@@ -1,92 +1,42 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" href="/images/movie_filter_FILL0_wght400_GRAD0_opsz48.svg">
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500&display=swap" rel="stylesheet">
-</head>
-<body>
-    <nav class="nav-bar">
-        <div class="logo">
-            Book Store
+﻿@model OnlineBookStoreProject.Models.DTO.BookListVm
+@{
+   Layout = "_Layout";
+}
+<section class="search-bar">
+    <form method="get" asp-action="Index">
+        <input type="text" name="term" placeholder="search here">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+</section>
+<section class="books">
+    @foreach(var book in Model.BookList)
+    {
+        <div class="book-card" onclick="window.location.href='/Home/BookDetail?bookId=@book.Id'">
+        <div class="book-image">
+            <img src="/Uploads/@book.BookImage">
         </div>
-        <ul class="nav-link">
-            <li><a class="active" href="/index.html">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li>
-                <a href="#">Admin <i class="fa fa-caret-down"></i></a>
-
-                <ul class="dropdown-nav-link">
-                    <li><a href="/forms.html">Form</a></li>
-                    <li><a href="/table.html">Table</a></li>
-                    <li><a href="/book-detail.html">Book Detail</a></li>
-                    <li><a href="#">Link 4</a></li>
-                    <li><a href="#">Logout</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Login</a></li>
-        </ul>
-    </nav>
-    <div class="container">
-        <section class="search-bar">
-            <form>
-                <input type="text" placeholder="search here">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-        </section>
-        <section class="books">
-            <div class="book-card" onclick="window.location.href='/book-detail.html'">
-                <div class="book-image">
-                    <img src="https://picsum.photos/id/1/200/300">
-                </div>
-                <div class="book-info">
-                    <h4>Book 1</h4>
-                    <h4>Action, Adventure</h4>
-                    <h4>John doe, max </h4>
-                    <h4>director 1</h4>
-                </div>
-            </div>
-
-
-            <div class="book-card">
-                <div class="book-image">
-                    <img src="https://picsum.photos/id/237/200/300">
-                </div>
-                <div class="book-info">
-                    <h4>Book 3</h4>
-                    <h4>Action, Adventure</h4>
-                    <h4>John doe, max,anna, ralph, dorian </h4>
-                    <h4>director 1,director 2,director 3</h4>
-                </div>
-            </div>
-
-
-        </section>
-
-        <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#">1</a>
-            <a class="active" href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#">&raquo;</a>
+        <div class="book-info">
+            <h4>@book.BookName</h4>
+                <h4>@book.GenreNames</h4>
+                <h4>@book.RealeaseYear </h4>
         </div>
     </div>
+    }
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - OnlineBookStoreProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    
-    
-</body>
-</html>
+</section>
+
+<div class="pagination" >
+    @for(int i = 1; i <= Model.TotalPages; i++)
+    {
+        @if(i==Model.CurrentPage)
+        {
+            <a href="/Home/Index?currentPage=@i&term=@Model.Term" class="active">@i</a>
+        }
+        else
+        {
+            <a href="/Home/Index?currentPage=@i&term=@Model.Term" >@i</a>
+        }
+    }
+
+
+</div>

@@ -1,1 +1,58 @@
-﻿
+﻿@{
+    string username = User.Identity.Name;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="/images/movie_filter_FILL0_wght400_GRAD0_opsz48.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            Book Store
+        </div>
+        <ul class="nav-link">
+            <li><a class="active" href="/Home/Index">Home</a></li>
+            <li><a href="/Home/About">About</a></li>
+            @if(!string.IsNullOrEmpty(username))
+            {
+               
+            }
+            <li>
+                <a href="#">Admin <i class="fa fa-caret-down"></i></a>
+
+                <ul class="dropdown-nav-link">
+                    <li><a href="/Genre/Add">Add Genre</a></li>
+                    <li><a href="/Book/Add">Add Book</a></li>
+                    <li><a href="/UserAuthentication/Logout">Logout</a></li>
+                </ul>
+            </li>
+            @if(string.IsNullOrEmpty(username))
+            {
+                <li><a href="/UserAuthentication/Login">Login</a></li>
+            }
+        </ul>
+    </nav>
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - OnlineBookStoreProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+
+</body>
+</html>

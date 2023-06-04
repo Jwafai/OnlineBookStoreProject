@@ -1,0 +1,22 @@
+﻿@model OnlineBookStoreProject.Models.Domain.Book
+@{
+}
+<section class="container">
+    <div class="book-detail w-80 m-auto">
+        <div class="img-container">
+            <img alt="image" src="/Uploads/@Model.BookImage">
+        </div>
+
+        <div class="detail-container">
+            <h3>@Model.BookName</h3>
+            <h4>@Model.GenreNames</h4>
+            <h4>@Model.RealeaseYear </h4>
+            <h4>@Model.AuthorName</h4>
+
+        </div>
+    </div>
+    <div class="w-80 m-auto">
+        <a href="/Home/Index" class="btn btn-default">Back</a>
+    </div>
+
+</section>

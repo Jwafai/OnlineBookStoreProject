@@ -1,0 +1,65 @@
+﻿@model OnlineBookStoreProject.Models.Domain.Book
+@{
+
+}
+<form class="w-40" asp-action="Add" method="post" enctype="multipart/form-data">
+    <h2 class="pb-10">Add Book</h2>
+
+    <div class="input-container" style="width: 600px; display: flex; padding: 0.4rem 0;">
+        <label asp-for="BookName" class="w-40" style="width: 100px;">BookName</label>
+        <input type="text" class="input" asp-for="BookName" style="width: 500px; border-radius: 5px;">
+    </div>
+
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for=BookName></span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="ImageFile" class="w-40" style="width: 100px;">Image</label>
+        <input type="file"  asp-for="ImageFile" >
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for=ImageFile></span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="Genres" class="w-40" style="width: 100px;">Genre</label>
+        <select asp-items="Model.GenreList" class="input" style="width: 500px; border-radius: 5px;" asp-for="Genres" multiple>
+            <option value="">--Select--</option>
+        </select>
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for=Genres></span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="RealeaseYear" class="w-40" style="width: 100px;">Realeased Year</label>
+        <input type="text" class="input" asp-for="RealeaseYear" style="width: 500px; border-radius: 5px;">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for=RealeaseYear></span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="AuthorName" class="w-40" style="width: 100px;">Author Name</label>
+        <input type="text" class="input" asp-for="AuthorName" style="width: 500px; border-radius: 5px;">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for=AuthorName></span>
+    </div>
+
+    
+
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert mb-1" style="width: 500px; border-radius: 5px;">
+           @TempData["msg"]
+        </div>
+    }
+
+    <div class="input-container">
+        <button class="btn btn-default" type="submit">Add</button>
+        <a class="btn btn-sec" href="/Book/BookList">All records</a>
+    </div>
+</form>
