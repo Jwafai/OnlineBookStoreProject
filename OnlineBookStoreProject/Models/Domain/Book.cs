@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Build.Framework;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection.Metadata.Ecma335;
@@ -17,6 +18,7 @@ namespace OnlineBookStoreProject.Models.Domain
         public string? BookImage { get; set;}
         [Required]
         public string? AuthorName { get; set;}
+        public double Price { get; set;} 
         
 
         [NotMapped]
@@ -29,5 +31,7 @@ namespace OnlineBookStoreProject.Models.Domain
         public string? GenreNames { get; set;}
         [NotMapped]
         public MultiSelectList? MultiGenreList { get; set;}
+
+    
     }
 }

@@ -1,5 +1,5 @@
 ﻿using OnlineBookStoreProject.Models.DTO;
-
+/*
 namespace OnlineBookStoreProject.Repositries.Abstract
 {
     public interface IUserAuthenticationService
@@ -10,3 +10,4 @@ namespace OnlineBookStoreProject.Repositries.Abstract
         //Task<Status> ChangePasswordAsync(ChangePasswordModel model, string username);
     }
 }
+*/

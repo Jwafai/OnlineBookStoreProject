@@ -44,6 +44,7 @@ namespace OnlineBookStoreProject.Controllers
                 var imageName = fileResult.Item2;
                 model.BookImage = imageName;
             }
+            model.Price = model.Price;
             var result = _bookService.Add(model);
 
            if(result)
@@ -89,6 +90,7 @@ namespace OnlineBookStoreProject.Controllers
                 var imageName = fileResult.Item2;
                 model.BookImage = imageName;
             }
+            model.Price = model.Price;
             var result = _bookService.Update(model);
             if (result)
             {

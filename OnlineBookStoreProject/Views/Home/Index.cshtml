@@ -1,7 +1,8 @@
 ﻿@model OnlineBookStoreProject.Models.DTO.BookListVm
 @{
-   Layout = "_Layout";
+    Layout = "_Layout";
 }
+<!--We did this-->
 <section class="search-bar">
     <form method="get" asp-action="Index">
         <input type="text" name="term" placeholder="search here">
@@ -9,34 +10,36 @@
     </form>
 </section>
 <section class="books">
-    @foreach(var book in Model.BookList)
+    @foreach (var book in Model.BookList)
     {
         <div class="book-card" onclick="window.location.href='/Home/BookDetail?bookId=@book.Id'">
-        <div class="book-image">
-            <img src="/Uploads/@book.BookImage">
+            <div class="book-image">
+                <img src="/Uploads/@book.BookImage">
+            </div>
+            <div class="book-info">
+                <h4>Book Name: @book.BookName</h4>
+                <h4>Genre: @book.GenreNames</h4>
+                <h4>Released Year: @book.RealeaseYear</h4>
+                <h4>Book Price:@book.Price</h4>
+            </div>
+            <button type="button" onclick="add(@book.Id)" class="btn" style="background-color: #4d63df; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.3rem; font-size: 1rem; font-weight: 500; cursor: pointer; box-shadow: 0 3px 3px 0 grey; line-height: 1.5; text-decoration: none; display: inline-block; margin-right: 0.2rem;">Add to cart</button>
         </div>
-        <div class="book-info">
-            <h4>@book.BookName</h4>
-                <h4>@book.GenreNames</h4>
-                <h4>@book.RealeaseYear </h4>
-        </div>
-    </div>
     }
-
 </section>
 
-<div class="pagination" >
-    @for(int i = 1; i <= Model.TotalPages; i++)
+
+<div class="pagination">
+    @for (int i = 1; i <= Model.TotalPages; i++)
     {
-        @if(i==Model.CurrentPage)
+        @if (i == Model.CurrentPage)
         {
             <a href="/Home/Index?currentPage=@i&term=@Model.Term" class="active">@i</a>
         }
         else
         {
-            <a href="/Home/Index?currentPage=@i&term=@Model.Term" >@i</a>
+            <a href="/Home/Index?currentPage=@i&term=@Model.Term">@i</a>
         }
     }
 
 
-</div>
+</div> 

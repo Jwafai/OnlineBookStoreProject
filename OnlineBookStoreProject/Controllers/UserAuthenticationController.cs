@@ -2,7 +2,7 @@
 using OnlineBookStoreProject.Models.DTO;
 using OnlineBookStoreProject.Repositries.Abstract;
 using System.Security.Policy;
-
+/*
 namespace OnlineBookStoreProject.Controllers
 {
     public class UserAuthenticationController : Controller
@@ -25,7 +25,7 @@ namespace OnlineBookStoreProject.Controllers
             };
             var result = await authService.RegisterAsync(model);
             return Ok(result.Message);
-        }*/
+        }
 
         public async Task<IActionResult> Login()
         {
@@ -57,3 +57,4 @@ namespace OnlineBookStoreProject.Controllers
 
     }
 }
+*/

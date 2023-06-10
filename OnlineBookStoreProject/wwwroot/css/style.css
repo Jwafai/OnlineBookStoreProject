@@ -26,6 +26,7 @@ body {
     justify-content: space-around;
     align-items: center;
     border-bottom: 3px solid rgb(84, 84, 84);
+ 
 }
 
 .logo {
@@ -37,8 +38,9 @@ body {
 }
 
 .nav-link {
-    list-style: none;
     display: flex;
+    align-items: center;
+
 }
 
     .nav-link > li {
@@ -81,6 +83,18 @@ body {
 .nav-link li ul:focus {
     visibility: visible;
 }
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+  
+}
+
+.nav-item {
+    margin-left: 10px;
+}
+
+
 
 .container {
     padding: 2rem;
@@ -173,6 +187,7 @@ body {
         width: 70%;
     }
 }
+
 .pagination {
     display: flex;
     justify-content: right;

@@ -52,7 +52,13 @@
         <span asp-validation-for=AuthorName></span>
     </div>
 
-
+    <div class="input-container">
+    <label asp-for="Price" class="w-40" style="width: 100px;">Price</label>
+    <input type="text" class="input" asp-for="Price" style="width: 500px; border-radius: 5px;">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Price"></span>
+    </div>
 
 
     @if (TempData["msg"] != null)

@@ -27,6 +27,7 @@ namespace OnlineBookStoreProject.Repositries.Implementation
                     };
                     ctx.BookGenre.Add(bookGenre);
                 }
+                model.Price = model.Price;
                 ctx.SaveChanges();
                 return true;
             }
