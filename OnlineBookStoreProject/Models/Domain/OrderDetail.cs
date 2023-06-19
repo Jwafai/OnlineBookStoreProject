@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Build.Framework;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineBookStoreProject.Models.Domain
 {
+    [Table("OrderDetail")]
+
     public class OrderDetail
     {
        
@@ -15,9 +18,6 @@ namespace OnlineBookStoreProject.Models.Domain
         public int BookId { get; set; }
         [Required]
         public int Quantity { get; set; }
-        [Required]
-        public double UnityPrice { get; set; }
-        [Required]
 
         public Order Order { get; set; }
         [BindNever]

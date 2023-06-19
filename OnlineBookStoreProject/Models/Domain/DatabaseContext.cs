@@ -21,8 +21,6 @@ namespace OnlineBookStoreProject.Models.Domain
         public DbSet<OrderDetail> OrderDetail { get; set; }
         public DbSet<OrderStatus> OrderStatus { get; set; }
 
-        
-        
-
+       
     }
 }

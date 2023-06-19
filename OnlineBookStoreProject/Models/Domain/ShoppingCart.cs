@@ -1,7 +1,10 @@
 ﻿using Microsoft.Build.Framework;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineBookStoreProject.Models.Domain
 {
+    [Table("ShoppingCart")]
+
     //we did it
     public class ShoppingCart
     {
@@ -9,5 +12,6 @@ namespace OnlineBookStoreProject.Models.Domain
         [Required]
         public string UserId { get; set; }
         public bool IsDeleted { get; set; } = false;
+        public ICollection<CartDetail> CartDetails { get; set; }
     }
 }

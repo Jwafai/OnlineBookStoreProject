@@ -12,6 +12,7 @@ namespace OnlineBookStoreProject.Repositries.Implementation
         {
             this.ctx = ctx;
         }
+        
         public bool Add(Book model)
         {
             try
@@ -63,7 +64,11 @@ namespace OnlineBookStoreProject.Repositries.Implementation
            return ctx.Book.Find(id);
            
         }
+        public async Task<IEnumerable<Genre>> Genres()
+        {
+            return await ctx.Genre.ToListAsync();
 
+        }
         public BookListVm List(string term="", bool paging = false, int currentPage = 0)
         {
             var data = new BookListVm();
@@ -133,5 +138,7 @@ namespace OnlineBookStoreProject.Repositries.Implementation
             var genreIds = ctx.BookGenre.Where(a=>a.BookId == bookId).Select(a=>a.GenreId).ToList();
             return genreIds;
         }
+
+        
     }
 }

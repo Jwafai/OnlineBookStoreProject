@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineBookStoreProject.Data.DbSeed;
 using OnlineBookStoreProject.Models.Domain;
+using OnlineBookStoreProject.Repositries;
 using OnlineBookStoreProject.Repositries.Abstract;
 using OnlineBookStoreProject.Repositries.Implementation;
 
@@ -14,6 +15,9 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<IGenreService , Genreservice>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<ICartRepository,CardRepository>();
+builder.Services.AddScoped<IUserOrderRepository, UserOrderRepositories>();
+
 
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("connection")));
 

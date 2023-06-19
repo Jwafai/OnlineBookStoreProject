@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineBookStoreProject.Models.Domain;
+using OnlineBookStoreProject.Models.DTO;
 using OnlineBookStoreProject.Repositries.Abstract;
 using System.Diagnostics;
 
@@ -12,12 +14,11 @@ namespace OnlineBookStoreProject.Controllers
             _bookService = bookService;
         }
 
-        public IActionResult Index(string term = "", int currentPage = 1)
+        public  IActionResult Index(string sterm = "", int currentPage = 1)
         {
-            var books = _bookService.List(term, true, currentPage);
+            var books = _bookService.List(sterm, true, currentPage); 
             return View(books);
         }
-
         public IActionResult About()
         {
             return View();

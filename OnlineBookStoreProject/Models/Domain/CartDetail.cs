@@ -13,8 +13,9 @@ namespace OnlineBookStoreProject.Models.Domain
         public int BookId { get; set; }
         [Required]
         public int Quantity { get; set; }
+        
 
-        [BindNever]
+
         public Book Book { get; set; }
         public ShoppingCart ShoppingCart { get; set; }
 

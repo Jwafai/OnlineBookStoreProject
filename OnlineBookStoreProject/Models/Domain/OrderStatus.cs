@@ -1,7 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineBookStoreProject.Models.Domain
 {
+    [Table("OrderStatus")]
+
     //We did it
     public class OrderStatus
     {

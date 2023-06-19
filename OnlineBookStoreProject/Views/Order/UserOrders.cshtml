@@ -1,0 +1,116 @@
+﻿@model IEnumerable<Order>
+@{
+}
+<div style="width:100%" class="mt-2">
+    <a href="/Identity/Account/Manage" class="btn btn-primary my-2" style="background-color: black;">Back</a>
+
+    <h4>My Orders</h4>
+    @if (Model != null && Model.Count() > 0)
+    {
+        <table class="table table-striped">
+            <tr>
+                <th>OrderDate</th>
+                <th>OrderStatus</th>
+            </tr>
+            <div class="my-2">
+                <form id="statusFilterForm" class="row row-cols-lg-auto g-3 align-items-center">
+                    <div class="col-12">
+                        <label class="visually-hidden" for="statusId">Status</label>
+                        <select class="form-select" id="statusId" name="statusId">
+                            <option value=0 selected>Pending</option>
+                            <option value=1 >Shipped</option>
+                            <option value=2>Completed</option>
+                            <option value=3>Pending</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Apply Filter</button>
+                    </div>
+                </form>
+            </div>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.CreateDate.ToString("dd-MM-yyyy")</td>
+                    <td>@order.OrderStatus.StatusName</td>
+                </tr>
+               
+             @if(order.OrderDetail != null && order.OrderDetail.Count > 0)
+                {
+                    
+                    <tr>
+                        <td>
+                            <table class="table table-striped">
+                                <tr>
+                                    <td>
+                                        Total:
+                                    </td>
+                                    <td>
+                                        @(order.OrderDetail.Select(item => item.Book.Price * item.Quantity).Sum())
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Book</th>
+                                    <th>Image</th>
+                                    <th>Genre</th>
+                                    <th>Unit Price(INR)</th>
+                                    <th>Total Price</th>
+                                </tr>
+                                @foreach (var item in order.OrderDetail)
+                                {
+                                    <tr>
+                                        <td>@item.Book.BookName</td>
+                                        <td>
+                                            @if (string.IsNullOrEmpty(item.Book.BookImage))
+                                            {
+                                                <img src="/images/NoImage.png" style="width:80px;height:100px" />
+                                            }
+                                            else
+                                            {
+                                                <img src="/Uploads/@item.Book.BookImage" style="width:80px;height:100px" />
+                                            }
+                                        </td>
+                                        <td>@item.Book.Genres</td>
+                                        <td>@item.Book.Price X @item.Quantity</td>
+                                        <td> @(item.Book.Price * item.Quantity) </td>
+                                    </tr>
+                                }
+                            </table>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+
+    }
+    else
+    {
+        <h5>No orders</h5>
+    }
+
+</div>
+<script>
+    // Submit the form using AJAX
+    document.getElementById("statusFilterForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form submission
+
+        var form = event.target;
+        var formData = new FormData(form);
+        var url = form.action;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url + "?" + new URLSearchParams(formData).toString());
+        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Update the order list container with the response content
+                document.getElementById("orderListContainer").innerHTML = xhr.responseText;
+            } else {
+                console.error("Request failed. Status: " + xhr.status);
+            }
+        };
+        xhr.send();
+    });
+</script>
+

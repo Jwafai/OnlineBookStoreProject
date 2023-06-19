@@ -2,6 +2,7 @@
 @{
     Layout = "_Layout";
 }
+
 <!--We did this-->
 <section class="search-bar">
     <form method="get" asp-action="Index">
@@ -12,21 +13,29 @@
 <section class="books">
     @foreach (var book in Model.BookList)
     {
-        <div class="book-card" onclick="window.location.href='/Home/BookDetail?bookId=@book.Id'">
-            <div class="book-image">
-                <img src="/Uploads/@book.BookImage">
+
+        <div class="book-card" style="width: 25rem;">
+            @if (string.IsNullOrEmpty(book.BookImage))
+            {
+                <img style="width:100%;height:180px" src="/images/NoImage.png" class="card-img-top" alt="...">
+
+            }
+            else
+            {
+                <img style="width:100%;height:180px" src="/Uploads/@book.BookImage" class="card-img-top" alt="...">
+            }
+            <div class="card-body">
+                <h5 class="card-title">@book.BookName</h5>
+                <p class="card-text">
+                    <b>Genre: </b>@book.GenreNames <br />
+                    <b>Author: </b>@book.AuthorName <br />
+                    <b>Price: </b>@book.Price
+                </p>
+                <button type="button" onclick="add(@book.Id)" class="btn" style="background-color: #4d63df; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.3rem; font-size: 1rem; font-weight: 500; cursor: pointer; box-shadow: 0 3px 3px 0 grey; line-height: 1.5; text-decoration: none; display: inline-block; margin-right: 0.2rem;">Add to cart</button>
             </div>
-            <div class="book-info">
-                <h4>Book Name: @book.BookName</h4>
-                <h4>Genre: @book.GenreNames</h4>
-                <h4>Released Year: @book.RealeaseYear</h4>
-                <h4>Book Price:@book.Price</h4>
-            </div>
-            <button type="button" onclick="add(@book.Id)" class="btn" style="background-color: #4d63df; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.3rem; font-size: 1rem; font-weight: 500; cursor: pointer; box-shadow: 0 3px 3px 0 grey; line-height: 1.5; text-decoration: none; display: inline-block; margin-right: 0.2rem;">Add to cart</button>
         </div>
     }
 </section>
-
 
 <div class="pagination">
     @for (int i = 1; i <= Model.TotalPages; i++)
@@ -42,4 +51,30 @@
     }
 
 
-</div> 
+</div>
+@section Scripts{
+    <script>  
+        async function add(bookId) {
+            var usernameEl = document.getElementById("username");
+            if (usernameEl == null) {
+                window.location.href = "/Identity/Account/Login";
+                //var username=usernameEl.innerText;
+                //  if(username.length<1){
+                //      window.location.href="/Identity/Account/Login";
+                //  }
+            }
+            try {
+                var response = await fetch(`/Cart/AddItem?bookId=${bookId}`);
+                if (response.status == 200) {
+                    var result = await response.json();
+                    var cartCountEl = document.getElementById("cartCount");
+                    cartCountEl.innerHTML = result;
+                    window.location.href = "#cartCount";
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+    </script>
+}
